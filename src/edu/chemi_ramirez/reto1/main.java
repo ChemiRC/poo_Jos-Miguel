@@ -2,12 +2,25 @@ package edu.chemi_ramirez.reto1;
 
 import edu.chemi_ramirez.reto1.ui.CLI;
 
-public class main {
+import java.util.Scanner;
+public class Main {
+
     public static void main(String[] args) {
-        try {
-            CLI.launchApp();
-        }catch(Exception e ){
-            System.out.println("error inesperado");
-        }
+        Scanner scanner = new Scanner(System.in);
+        CLI cli = new CLI(scanner);
+
+        char opcion;
+        do {
+            cli.mostrarMenu();
+            opcion = cli.obtenerOpcion();
+
+            if (opcion != 'D') {
+                Process.procesarOpcion(opcion, cli);
+            }
+
+        } while (opcion != 'D');
+
+        cli.mostrarMensaje("Programa finalizado.");
+        cli.cerrarScanner();
     }
 }
